@@ -1,4 +1,10 @@
 fn main() {
+
+    slice_1();
+    slice_test();
+}
+
+fn slice_1() {
     let mut s = String::from("hello world");
     {
         let word = first_word(&s);
@@ -43,4 +49,14 @@ fn first_word(s: &str) -> &str {
     }
 
     &s[..]
+}
+
+fn slice_test() {
+    let numbers:[i32;3] = [1, 2, 3,];
+
+    assert_eq!([1, 2, 3], &numbers[..]);
+
+    for n in numbers.iter() {
+        println!("number! {}", n);
+    }
 }
