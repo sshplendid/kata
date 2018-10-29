@@ -1,0 +1,6 @@
+[package]
+name = "enum_example"
+version = "0.1.0"
+authors = ["SeHun Shin <s.shin@marathoner.kr>"]
+
+[dependencies]
