@@ -1,7 +1,7 @@
 fn main() {
-
     slice_1();
     slice_test();
+    string_test();
 }
 
 fn slice_1() {
@@ -52,11 +52,24 @@ fn first_word(s: &str) -> &str {
 }
 
 fn slice_test() {
-    let numbers:[i32;3] = [1, 2, 3,];
+    let numbers: [i32; 3] = [1, 2, 3];
 
     assert_eq!([1, 2, 3], &numbers[..]);
 
     for n in numbers.iter() {
         println!("number! {}", n);
     }
+}
+
+fn string_test() {
+    let str1 = "hello";
+    let str2: &str = "world";
+    let str3: String = String::from("Rust is awesome!");
+    let str4: &str = &str3[2..8];
+    let str5: &str = &str2[2..5];
+    println!("str1=>{}", str1);
+    println!("str2=>{}", str2);
+    println!("str3=>{}", str3);
+    println!("str4=>{}", str4);
+    println!("str5=>{}", str5);
 }
