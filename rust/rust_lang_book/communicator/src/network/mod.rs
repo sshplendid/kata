@@ -1,12 +1,12 @@
 // network::mod.rs
-fn connect() {
+pub fn connect() {
     println!("connect to network!");
 }
 
-mod server;
+pub mod server;
 
-mod client {
-    fn connect() {
+pub mod client {
+    pub fn connect() {
         println!("connect to network client!");
     }
 }

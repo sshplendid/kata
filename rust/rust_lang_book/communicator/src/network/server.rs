@@ -1,4 +1,4 @@
 // server.rs
-fn connect() {
+pub fn connect() {
     println!("connet to network server!");
 }
