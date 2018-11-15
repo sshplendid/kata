@@ -1,4 +1,5 @@
 fn main() {
+    // vector
     case_create_new_vector_1();
     case_create_new_vector_2();
     case_update_vector();
@@ -7,7 +8,17 @@ fn main() {
     case_ownership_in_vector();
     case_iterate_vector();
     case_use_enum_to_store_multiple_types();
-    println!("Hello, world!");
+    
+    // HashMap
+    create_new_hashmap();
+    create_new_hashmap_from_vector();
+    hashmap_and_ownership();
+    access_hashmap_values();
+    access_and_print_hashmap();
+
+    update_hashmap();
+    insert_if_not_exists();
+    update_based_on_exists();
 }
 
 fn case_create_new_vector_1() {
@@ -98,4 +109,85 @@ fn case_use_enum_to_store_multiple_types() {
         SpreadsheetCell::Text(String::from("blue")),
         SpreadsheetCell::Float(10.12),
     ];
+}
+
+use std::collections::HashMap;
+
+fn create_new_hashmap() {
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+}
+
+fn create_new_hashmap_from_vector() {
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+
+    let mut scores:HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+
+    println!("{:?}", scores);
+}
+
+fn hashmap_and_ownership() {
+    let mut scores = HashMap::new();
+    let key = String::from("blue");
+    let val = 3;
+    scores.insert(key, val);
+}
+
+fn access_hashmap_values() {
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);
+}
+
+fn access_and_print_hashmap() {
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
+}
+
+fn update_hashmap() {
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Blue"), 50);
+
+    println!("{:?}", scores);
+}
+
+fn insert_if_not_exists() {
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+
+    println!("{:?}", scores);
+}
+
+fn update_based_on_exists() {
+    let text = "hello world wonderful world";
+
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+
+    println!("{:?}", map);
 }
