@@ -11,11 +11,15 @@ pub struct Config {
 
 impl Config {
     pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 4 {
+        if args.len() < 3 {
             return Err("Not enough arguments!");
         }
 
-        let case_sensitive = args[3].contains("-c");
+        let mut case_sensitive = true;
+        if args.len() > 3 && args[3].contains("-c") {
+            case_sensitive = false;
+        }
+
         let query = args[1].clone();
         let filename = args[2].clone();
 
