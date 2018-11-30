@@ -9,6 +9,12 @@ struct Point<T, U> {
     y: U,
 }
 
+impl<T, U> Point<T, U> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+
 
 fn test_will_work() {
     let integer = Point { x: 5, y: 10 };
