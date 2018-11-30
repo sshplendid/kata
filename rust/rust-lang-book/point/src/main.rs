@@ -51,5 +51,11 @@ fn test_implementation() {
     println!("x of mixed up point is {}", mixup.x());
 
 
+    let p = Point { x: b'c', y: 10 };
+    let other = Point { x: 1.1, y: 2.2 };
+
+    let mixup = p.mixup(other);
+    println!("x of mixed up point is {}", mixup.x());
+
     //println!("{:?}", p);
 }
