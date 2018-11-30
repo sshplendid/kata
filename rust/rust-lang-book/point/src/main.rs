@@ -1,6 +1,7 @@
 fn main() {
     test_will_work();
     test_multi_types();
+    test_implementation();
 }
 
 #[derive(Debug)]
@@ -28,4 +29,10 @@ fn test_multi_types() {
     let integer_and_float = Point { x:1, y: 2.1 };
 
     println!("{:?}", integer_and_float);
+}
+
+fn test_implementation() {
+    let p = Point { x: 5, y: 10 };
+
+    println!("p.x = {}", p.x());
 }
