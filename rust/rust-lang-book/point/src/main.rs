@@ -1,12 +1,12 @@
 fn main() {
     test_will_work();
-    test_wont_work();
+    test_multi_types();
 }
 
 #[derive(Debug)]
-struct Point<T> {
+struct Point<T, U> {
     x: T,
-    y: T,
+    y: U,
 }
 
 
@@ -18,8 +18,8 @@ fn test_will_work() {
     println!("float point {:?}", float);
 }
 
-fn test_wont_work() {
-    let wont_work = Point { x:1, y: 2.1 };
+fn test_multi_types() {
+    let integer_and_float = Point { x:1, y: 2.1 };
 
-    println!("{:?}", wont_work);
+    println!("{:?}", integer_and_float);
 }
