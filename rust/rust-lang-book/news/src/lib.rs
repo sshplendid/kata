@@ -48,5 +48,8 @@ mod tests {
         };
 
         println!("1 new tweet: {}", tweet.summary());
+        
+        let expected = format!("{}: {}", tweet.username, tweet.content);
+        assert_eq!(tweet.summary(), expected);
     }
 }
