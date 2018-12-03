@@ -5,9 +5,12 @@ fn main() {
 
 
     let string1 = &args[1];
-    let string2 = &args[2];
 
-    let result = longest(string1.as_str(), string2);
+    let result;
+    {
+        let string2 = &args[2];
+        result = longest(string1.as_str(), string2);
+    }
 
     println!("The longest string is '{}'.", result);
 }
