@@ -1,0 +1,6 @@
+[package]
+name = "first_sentence"
+version = "0.1.0"
+authors = ["SeHun Shin <shun.shin@samsung.com>"]
+
+[dependencies]
