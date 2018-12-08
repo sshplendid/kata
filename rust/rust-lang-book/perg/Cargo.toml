@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["SeHun Shin <s.shin@marathoner.kr>"]
 
 [dependencies]
+colored = "1.6"

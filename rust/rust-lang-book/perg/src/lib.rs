@@ -1,8 +1,11 @@
+extern crate colored;
+
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 
-//const MAX_ARGS:u32 = 4;
+use colored::*;
+
 pub struct Config {
     pub query: String,
     pub filename: String,
@@ -38,7 +41,7 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     file.read_to_string(&mut contents)?;
 
     let lines = search_with_case_insensitive(&config.query, &contents, config.case_sensitive);
-    print(lines);
+    print_lines(lines, &config.query);
 
     Ok(())
 }
@@ -82,12 +85,22 @@ fn convert_case(str_to_convert: &str) -> String {
     result
 }
 
-fn print(lines: Vec<&str>) -> () {
+fn print_lines(lines: Vec<&str>, query: &str) -> () {
     for line in lines.iter() {
-        println!("{}", line);
+        print(&line, &query);
     }
 }
 
+fn print(line: &str, query: &str) -> () {
+    let v: Vec<&str> = line.split(&query).collect();
+
+    print!("{}", v[0]);
+    for i in (1..v.len()) {
+        print!("{}", query.blue().reverse());
+        print!("{}", v[i]);
+    }
+    println!("");
+}
 #[cfg(test)]
 mod test {
     use super::*;
@@ -140,5 +153,31 @@ Trust me.";
             vec!["Rust:", "Trust me.",],
             search_with_case_insensitive(query, contents, case_sensitive)
         );
+    }
+
+    #[test]
+    fn colored_test() {
+        let green = "it works".green();
+        let reverse_blue = "awesome colored!".blue().reverse();
+
+        println!("{} {}", green, reverse_blue);
+        //println!("{} {}", green.compute_style(), reverse_blue.compute_style());
+    }
+
+    #[test]
+    fn split_test() {
+        let line = "This apple is awesome!";
+        let pattern = "a";
+
+        let v: Vec<&str> = line.split(&pattern).collect();
+
+        print!("{}", v[0]);
+        for i in (1..v.len()) {
+            print!("{}", pattern.blue().reverse());
+            print!("{}", v[i]);
+        }
+        println!("");
+
+        assert_eq!(v, ["This ", "pple is ", "wesome!"]);
     }
 }
