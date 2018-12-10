@@ -43,3 +43,10 @@ fn generate_workout(intensity: u32, random_number: u32) {
         }
     }
 }
+
+struct Cacher<T>
+    where T: Fn(u32) -> u32
+{
+    calculation: T,
+    value: Option<u32>,
+}
