@@ -75,3 +75,34 @@ impl<T> Cacher<T>
         }
     }
 }
+
+#[test]
+fn call_with_same_value() {
+    let mut c = Cacher::new(|a| a);
+
+    let v1 = c.value(1);
+
+    assert_eq!(v1, 1);
+}
+
+#[test]
+fn call_with_different_value() {
+    let mut c = Cacher::new(|a| a);
+
+    let v1 = c.value(1);
+    let v1 = c.value(2);
+
+    assert_eq!(v1, 2);
+}
+
+#[test]
+fn lexical_scope_test() {
+    let x = 4;
+
+    //let equal_to_x = |z| z == x;
+    fn equal_to_x(z: i32) -> bool { z == x }
+
+    let y = 4;
+
+    assert!(equal_to_x(y));
+}
