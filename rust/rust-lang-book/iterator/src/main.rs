@@ -1,5 +1,6 @@
 fn main() {
     create_iterator();
+    map_example();
 }
 
 fn create_iterator() {
@@ -35,4 +36,16 @@ fn iterator_sum() {
     assert_eq!(total, 6);
 
     //println!("{:?}", v1_iter); // moved value
+}
+
+
+#[test]
+fn map_example() {
+    let v1: Vec<i32> = vec![1, 2, 3];
+
+    let result: Vec<_> = v1.iter().map(|x| x + 1).collect();
+
+    println!("{:?}", result);
+
+    assert_eq!(result, vec![2, 3, 4]);
 }
