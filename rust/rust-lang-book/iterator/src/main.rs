@@ -49,4 +49,50 @@ mod tests {
 
         assert_eq!(result, vec![2, 3, 4]);
     }
+
+    use super::*;
+
+    #[test]
+    fn filtered_shoes_by_size() {
+        let shoes = vec![
+            Shoe {
+                size: 10,
+                style: String::from("Sneaker"),
+            },
+            Shoe {
+                size: 19,
+                style: String::from("Sandal"),
+            },
+            Shoe {
+                size: 10,
+                style: String::from("Crocs"),
+            },
+        ];
+
+        let in_my_size = shoes_in_my_size(shoes, 10);
+
+        assert_eq!(
+            in_my_size,
+            vec![
+                Shoe {
+                    size: 10,
+                    style: String::from("Sneaker"),
+                },
+                Shoe {
+                    size: 10,
+                    style: String::from("Crocs"),
+                },
+            ]
+        );
+    }
+}
+
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u32,
+    style: String,
+}
+
+fn shoes_in_my_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
+    shoes.into_iter().filter(|s| s.size == shoe_size).collect()
 }
