@@ -89,16 +89,10 @@ pub fn search_with_case_insensitive<'a>(
     contents: &'a str,
     case_sensitive: bool,
 ) -> Vec<&'a str> {
-    let mut results = Vec::new();
-
-    for line in contents.lines() {
-        // do something here
-        if is_fit(query, line, case_sensitive) {
-            results.push(line);
-        }
-    }
-
-    results
+    contents
+        .lines()
+        .filter(|line| is_fit(query, line, case_sensitive))
+        .collect()
 }
 
 fn is_fit(query: &str, line: &str, case_sensitive: bool) -> bool {
