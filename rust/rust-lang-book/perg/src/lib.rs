@@ -1,5 +1,6 @@
 extern crate colored;
 
+use std::env;
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
@@ -25,6 +26,40 @@ impl Config {
 
         let query = args[1].clone();
         let filename = args[2].clone();
+
+        Ok(Config {
+            query,
+            filename,
+            case_sensitive,
+        })
+    }
+
+    pub fn from_args(mut args: std::env::Args) -> Result<Config, &'static str> {
+        // skip program name
+        args.next();
+
+        let query = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Didn't get a query string"),
+        };
+
+        let filename = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Didn't get a file name"),
+        };
+
+        let mut case_sensitive = env::var("CASE_INSENSITIVE").is_err();
+
+        match args.next() {
+            Some(arg) => {
+                if arg.contains("c") {
+                    case_sensitive = false;
+                }
+            }
+            None => {
+                case_sensitive = true;
+            }
+        }
 
         Ok(Config {
             query,
