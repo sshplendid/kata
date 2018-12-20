@@ -34,6 +34,8 @@ fn main() {
     get_value_with_box();
     println!("---------");
     mybox();
+    println!("---------");
+    implicit_deref_coercions_test();
 }
 
 fn store_data_with_box() {
@@ -72,4 +74,16 @@ fn mybox() {
 
     assert_eq!(5, x);
     assert_eq!(5, *y);
+    println!("y.deref(): {}", y.deref()); // *y 는 내부적으로 y.deref() 를 호출한다.
 }
+
+fn greeting(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn implicit_deref_coercions_test() {
+    let shawn = MyBox::new(String::from("Shawn"));
+
+    greeting(&shawn);
+}
+
