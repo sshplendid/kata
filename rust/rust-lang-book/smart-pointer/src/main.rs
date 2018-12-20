@@ -6,6 +6,15 @@ enum List {
 
 use self::List::{Cons, Nil};
 
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+
 fn main() {
     store_data_with_box();
     println!("---------");
