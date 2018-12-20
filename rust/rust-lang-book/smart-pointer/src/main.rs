@@ -13,6 +13,7 @@ fn main() {
     println!("---------");
     get_value_with_deref();
     println!("---------");
+    get_value_with_box();
 }
 
 fn store_data_with_box() {
@@ -28,6 +29,16 @@ fn store_cons_list() {
 fn get_value_with_deref() {
     let x = 5;
     let y = &x;
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
+    println!("deref y = {}", *y);
+    println!("ref y = {}", y);
+}
+
+fn get_value_with_box() {
+    let x = 5;
+    let y = Box::new(x);
 
     assert_eq!(5, x);
     assert_eq!(5, *y);
