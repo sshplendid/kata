@@ -14,6 +14,15 @@ impl<T> MyBox<T> {
     }
 }
 
+use std::ops::Deref;
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
 
 fn main() {
     store_data_with_box();
@@ -23,6 +32,8 @@ fn main() {
     get_value_with_deref();
     println!("---------");
     get_value_with_box();
+    println!("---------");
+    mybox();
 }
 
 fn store_data_with_box() {
@@ -53,4 +64,12 @@ fn get_value_with_box() {
     assert_eq!(5, *y);
     println!("deref y = {}", *y);
     println!("ref y = {}", y);
+}
+
+fn mybox() {
+    let x = 5;
+    let y = MyBox::new(x);
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
 }
