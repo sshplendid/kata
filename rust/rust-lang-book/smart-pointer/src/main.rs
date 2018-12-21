@@ -36,6 +36,8 @@ fn main() {
     mybox();
     println!("---------");
     implicit_deref_coercions_test();
+    println!("---------");
+    drop_test();
 }
 
 fn store_data_with_box() {
@@ -87,3 +89,18 @@ fn implicit_deref_coercions_test() {
     greeting(&shawn);
 }
 
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with Data `{}`!", self.data);
+    }
+}
+
+fn drop_test() {
+    let c = CustomSmartPointer {data: String::from("my stuff") };
+    let d = CustomSmartPointer {data: String::from("other stuff") };
+    println!("CustomSmartPointers created.");
+}
