@@ -1,7 +1,15 @@
+use std::fmt::Debug;
+
 #[derive(Debug)]
-enum List<T> {
+enum List<T: Debug> {
     Cons(T, Rc<List<T>>),
     Nil,
+}
+
+impl<T: Debug> Drop for List<T> {
+    fn drop(&mut self) {
+        println!("Dropping List with data {:?}!", self);
+    }
 }
 
 use self::List::{Cons, Nil};
