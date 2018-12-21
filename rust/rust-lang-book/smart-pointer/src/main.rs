@@ -38,6 +38,8 @@ fn main() {
     implicit_deref_coercions_test();
     println!("---------");
     drop_test();
+    println!("---------");
+    drop_early_test();
 }
 
 fn store_data_with_box() {
@@ -103,4 +105,11 @@ fn drop_test() {
     let c = CustomSmartPointer {data: String::from("my stuff") };
     let d = CustomSmartPointer {data: String::from("other stuff") };
     println!("CustomSmartPointers created.");
+}
+
+fn drop_early_test() {
+    let c = CustomSmartPointer { data: String::from("some data"), };
+    println!("CustomSmartPointer created.");
+    drop(c); // c.drop();
+    println!("CustomSmartPointer dropped before the end of main.");
 }
