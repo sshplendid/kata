@@ -4,9 +4,9 @@ enum List {
     Nil,
 }
 
-use List::{Cons, Nil};
 use std::cell::RefCell;
 use std::rc::Rc;
+use List::{Cons, Nil};
 
 fn main() {
     let value = Rc::new(RefCell::new(5));
@@ -17,6 +17,14 @@ fn main() {
     let c = Cons(Rc::new(RefCell::new(10)), Rc::clone(&a));
 
     *value.borrow_mut() += 10;
+    {
+        match &b {
+            List::Cons(x, y) => {
+                *x.borrow_mut() += 4;
+            }
+            List::Nil => { println!("no cons!"); }
+        };
+    }
 
     println!("a after = {:?}", a);
     println!("b after = {:?}", b);
