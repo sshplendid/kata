@@ -1,0 +1,7 @@
+[package]
+name = "ref-node"
+version = "0.1.0"
+authors = ["SeHun Shin <s.shin@marathoner.kr>"]
+edition = "2018"
+
+[dependencies]
